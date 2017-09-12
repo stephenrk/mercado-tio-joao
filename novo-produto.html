@@ -410,33 +410,33 @@
                 <div class="row">
                   <div class="col-lg-8">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Categoria</label>
-                        <select name="categoria" id="categoria" class="form-control required">
-                          <option value="">Selecione...</option>
-                          <option value="1">Padaria</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputPassword1">Título</label>
-                        <input type="text" class="form-control required" name="titulo" id="titulo" placeholder="ex: Pão de Forma">
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputPassword1">Descrição</label>
-                        <input name="decricao" id="descricao" type="text" class="form-control required" placeholder="Descrição do produto">
-                      </div>
-                      <div class="form-group">
-                        <label class="col-xs-12" for="exampleInputPassword1" style="padding-left:0">Imagem do produto</label>
-                        <div class="fileinput fileinput-new" data-provides="fileinput">
-                          <div class="fileinput-new thumbnail" style="width: 150px; height: 150px;">
-                            <img src="https://s3.amazonaws.com/popco/images/services/starter-page/img-round-placeholder.jpg" alt="Imagem do produto">
-                          </div>
-                          <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
-                          <div>
-                            <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar</span><span class="fileinput-exists">Trocar</span><input type="file" name="..."></span>
-                            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remover</a>
-                          </div>
+                      <label for="exampleInputEmail1">Categoria</label>
+                      <select name="categoria" id="categoria" class="form-control required">
+                        <option value="">Selecione...</option>
+                        <option value="1">Padaria</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Título</label>
+                      <input type="text" class="form-control required" name="titulo" id="titulo" placeholder="ex: Pão de Forma">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Descrição</label>
+                      <input name="decricao" id="descricao" type="text" class="form-control required" placeholder="Descrição do produto">
+                    </div>
+                    <div class="form-group">
+                      <label class="col-xs-12" for="exampleInputPassword1" style="padding-left:0">Imagem do produto</label>
+                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                        <div class="fileinput-new thumbnail" style="width: 150px; height: 150px;">
+                          <img src="https://s3.amazonaws.com/popco/images/services/starter-page/img-round-placeholder.jpg" alt="Imagem do produto">
+                        </div>
+                        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                        <div>
+                          <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar</span><span class="fileinput-exists">Trocar</span><input type="file" name="..." class="required"></span>
+                          <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remover</a>
                         </div>
                       </div>
+                    </div>
                   </div>
                   <div class="col-lg-4">
                     <div class="text-center">
@@ -446,8 +446,8 @@
                     </div>
                   </div>
                 </div>
-                
               </fieldset>
+              
               <h1>Profile</h1>
               <fieldset>
                 <h2>Profile Information</h2>
@@ -472,13 +472,6 @@
                       <input id="address" name="address" type="text" class="form-control">
                     </div>
                   </div>
-                </div>
-              </fieldset>
-              
-              <h1>Warning</h1>
-              <fieldset>
-                <div class="text-center" style="margin-top: 120px">
-                  <h2>You did it Man :-)</h2>
                 </div>
               </fieldset>
               
@@ -527,8 +520,33 @@
           railOpacity: 0.9
         });
         
+        $.extend($.validator.messages, {
+          required: "Campo obrigatório.",
+          remote: "Please fix this field.",
+          email: "E-mail inválido",
+          url: "URL inválida.",
+          date: "Data inválida.",
+          number: "Valor inválido.",
+          equalTo: "Please enter the same value again.",
+          accept: "Please enter a value with a valid extension.",
+          maxlength: $.validator.format("Please enter no more than {0} characters."),
+          minlength: $.validator.format("Please enter at least {0} characters."),
+          rangelength: $.validator.format("Please enter a value between {0} and {1} characters long."),
+          range: $.validator.format("Please enter a value between {0} and {1}."),
+          max: $.validator.format("Please enter a value less than or equal to {0}."),
+          min: $.validator.format("Please enter a value greater than or equal to {0}.")
+        });
+        
         $("#form").steps({
           bodyTag: "fieldset",
+          labels: {
+            current: "passo atual:",
+            pagination: "Paginação",
+            finish: "Enviar",
+            next: "Próximo",
+            previous: "Anterior",
+            loading: "Carregando ..."
+          },
           onStepChanging: function (event, currentIndex, newIndex)
           {
             // Always allow going backward even if the current step contains invalid fields!
@@ -538,10 +556,10 @@
             }
             
             // Forbid suppressing "Warning" step if the user is to young
-            if (newIndex === 3 && Number($("#age").val()) < 18)
+            /*if (newIndex === 3 && Number($("#age").val()) < 18)
             {
               return false;
-            }
+            }*/
             
             var form = $(this);
             
@@ -562,10 +580,10 @@
           onStepChanged: function (event, currentIndex, priorIndex)
           {
             // Suppress (skip) "Warning" step if the user is old enough.
-            if (currentIndex === 2 && Number($("#age").val()) >= 18)
+            /*if (currentIndex === 2 && Number($("#age").val()) >= 18)
             {
               $(this).steps("next");
-            }
+            }*/
             
             // Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
             if (currentIndex === 2 && priorIndex === 3)
