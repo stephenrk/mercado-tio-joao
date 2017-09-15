@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Mercado Tio João</title>
+		<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+	    <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet" />
+	    
+	    <link th:href="@{/css/animate.css}" rel="stylesheet" />
+	    <link th:href="@{/css/style.css}" rel="stylesheet" />
+	</head>
+	<body class="fixed-sidebar fixed-nav">
+		
+		<div id="wrapper">
+			<th:block layout:include="menu-lateral"></th:block>
+			<div id="page-wrapper" class="gray-bg">
+				<th:block layout:include="cabecalho"></th:block>
+				<th:block layout:fragment="conteudo"></th:block>
+			</div>
+		</div>	
+	
+		<!-- Mainly scripts -->
+	    <script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+	    <script th:src="@{/js/bootstrap.min.js}"></script>
+	    <script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+	    <script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+	    
+	    <!-- Custom and plugin javascript -->
+	    <script th:src="@{/js/inspinia.js}"></script>
+	    <script th:src="@{/js/plugins/pace/pace.min.js}"></script>
+	    
+	    <script>
+	    	$('.sidebar-collapse').slimScroll({
+	          height: '100%',
+	          railOpacity: 0.9
+	        });
+	    </script>
+	    
+	    <th:block layout:fragment="scripts"></th:block>
+	    
+	</body>
+</html>
