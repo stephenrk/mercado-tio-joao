@@ -73,7 +73,7 @@
           <div class="ibox">
             <div class="ibox-content">
               
-              <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+              <table class="footable table table-stripped table-hover toggle-arrow-tiny" data-page-size="15">
                 <thead>
                   <tr>
                     
@@ -88,10 +88,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      Example product 1
-                    </td>
+                  <tr th:each="produto : ${produtos}">
+                    <td th:text="${produto.nome}"></td>
                     <td>
                       Model 1
                     </td>
