@@ -29,7 +29,12 @@
 		
 		<dependency>
 			<groupId>br.com.mercadotiojoao</groupId>
-			<artifactId>repository</artifactId>
+			<artifactId>service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>br.com.mercadotiojoao</groupId>
+			<artifactId>domain</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>

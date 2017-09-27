@@ -8566,3 +8566,7 @@ body.md-skin {
 .wizard-big.wizard > .content {
   min-height: 545px !important;
 }
+
+div.fileinput {
+	padding-left: 0;
+}

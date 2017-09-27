@@ -10,6 +10,9 @@
     <link th:href="@{/css/plugins/iCheck/custom.css}" rel="stylesheet" />
     <link th:href="@{/css/plugins/jasny/jasny-bootstrap.min.css}" rel="stylesheet" />
     <link th:href="@{/css/plugins/steps/jquery.steps.css}" rel="stylesheet" />
+    
+    <link th:href="@{/css/plugins/summernote/summernote.css}" rel="stylesheet" />
+    <link th:href="@{/css/plugins/summernote/summernote-bs3.css}" rel="stylesheet" />
   </head>
   
   <th:block layout:fragment="conteudo">
@@ -36,9 +39,9 @@
       <div class="animated fadeInRight">
         <p>Informe abaixo os dados do produto</p>
         <form id="form" action="#" class="wizard-big">
-          <h1>Inf. Básicas</h1>
+          <h1>Inf. do Produto</h1>
           <fieldset>
-            <h2>Informações Básicas</h2>
+            <h2>Informações do Produto</h2>
             <div class="row">
               <div class="col-lg-8">
                 <div class="form-group">
@@ -57,14 +60,14 @@
                   <input name="decricao" id="descricao" type="text" class="form-control required" placeholder="Descrição do produto" />
                 </div>
                 <div class="form-group">
-                  <label class="col-xs-12" for="exampleInputPassword1" style="padding-left:0">Imagem do produto</label>
-                  <div class="fileinput fileinput-new" data-provides="fileinput">
+                  <label for="exampleInputPassword1" id="labelTeste" style="padding-left:0">Imagem do produto</label>
+                  <div class="fileinput fileinput-new col-xs-12" data-provides="fileinput">
                     <div class="fileinput-new thumbnail" style="width: 150px; height: 150px;">
                       <img src="https://s3.amazonaws.com/popco/images/services/starter-page/img-round-placeholder.jpg" alt="Imagem do produto" />
                     </div>
                     <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
                     <div>
-                      <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar</span><span class="fileinput-exists">Trocar</span><input type="file" name="..." class="required" /></span>
+                      <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar</span><span class="fileinput-exists">Trocar</span><input type="file" name="teste" class="required" /></span>
                       <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remover</a>
                     </div>
                   </div>
@@ -135,9 +138,15 @@
     <!-- Jquery Validate -->
     <script th:src="@{/js/plugins/validate/jquery.validate.min.js}"></script>
     
-    <script>
-      //<![CDATA[
+    <!-- SUMMERNOTE -->
+	<script th:src="@{/js/plugins/summernote/summernote.min.js}"></script>
+    
+    <script th:inline="javascript">
+    /*<![CDATA[*/
       $(document).ready(function(){
+    	  
+    	$('#summernote').summernote();
+    	  
         $.extend($.validator.messages, {
           required: "Campo obrigatório.",
           remote: "Please fix this field.",
@@ -173,12 +182,6 @@
               return true;
             }
             
-            // Forbid suppressing "Warning" step if the user is to young
-            //if (newIndex === 3 && Number($("#age").val()) < 18)
-            //{
-            //  return false;
-            //}
-            
             var form = $(this);
             
             // Clean up if user went backward before
@@ -194,20 +197,6 @@
             
             // Start validation; Prevent going forward if false
             return form.valid();
-          },
-          onStepChanged: function (event, currentIndex, priorIndex)
-          {
-            // Suppress (skip) "Warning" step if the user is old enough.
-            /*if (currentIndex === 2 && Number($("#age").val()) >= 18)
-            {
-            $(this).steps("next");
-            }*/
-            
-            // Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
-            if (currentIndex === 2 && priorIndex === 3)
-            {
-              $(this).steps("previous");
-            }
           },
           onFinishing: function (event, currentIndex)
           {
@@ -230,16 +219,15 @@
         }).validate({
           errorPlacement: function (error, element)
           {
-            element.before(error);
-          },
-          rules: {
-            confirm: {
-              equalTo: "#password"
-            }
+        	  if(element.attr('name') === 'teste') {
+        		  error.insertAfter($('label#labelTeste'));
+       		  } else {
+       			element.before(error);
+       		  }
           }
         });
       });
-      //]]>
+      /*]]>*/
     </script>
   </th:block>
 </html>

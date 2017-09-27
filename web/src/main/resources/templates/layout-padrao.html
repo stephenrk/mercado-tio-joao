@@ -34,10 +34,12 @@
 	    <script th:src="@{/js/plugins/pace/pace.min.js}"></script>
 	    
 	    <script>
-	    	$('.sidebar-collapse').slimScroll({
-	          height: '100%',
-	          railOpacity: 0.9
-	        });
+	    	$(document).ready(function() {
+	    		$('.sidebar-collapse').slimScroll({
+	  	          height: '100%',
+	  	          railOpacity: 0.9
+	  	        });
+	    	});
 	    </script>
 	    
 	    <th:block layout:fragment="scripts"></th:block>
